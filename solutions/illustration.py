@@ -1,0 +1,20 @@
+pca = PCA(n_components=2)
+pca.fit(X_train)
+lda = LinearDiscriminantAnalysis(n_components=2)
+lda.fit(X_train, c_train)
+nca = NeighborhoodComponentsAnalysis(n_components=2)
+nca.fit(X_train, c_train)
+
+X_test_pca = pca.transform(X_test)
+X_test_lda = lda.transform(X_test)
+X_test_nca = nca.transform(X_test)
+
+fig, ax = plt.subplots(1, 3, figsize=(20, 7))
+
+ax[0].scatter(X_test_pca[:,0], X_test_pca[:,1], c=c_test)
+ax[0].set_xlabel('PCA')
+ax[1].scatter(X_test_lda[:,0], X_test_lda[:,1], c=c_test)
+ax[1].set_xlabel('LDA')
+ax[2].scatter(X_test_nca[:,0], X_test_nca[:,1], c=c_test)
+ax[2].set_xlabel('NCA')
+plt.show()
